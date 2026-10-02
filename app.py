@@ -18,8 +18,22 @@ st.set_page_config(
 # ==============================
 if "started" not in st.session_state:
     st.session_state.started = False
+    
 if "page" not in st.session_state:
     st.session_state.page = "Home"
+    
+if "coins" not in st.session_state:
+    st.session_state.coins = 0
+
+if "badges" not in st.session_state:
+    st.session_state.badges = 0
+
+if "study_minutes" not in st.session_state:
+    st.session_state.study_minutes = 0
+
+if "level" not in st.session_state:
+    st.session_state.level = 1
+    
 # ==============================
 # SURFACE STYLE
 # ==============================
