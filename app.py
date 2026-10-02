@@ -140,6 +140,50 @@ st.markdown("""
 button {
     border-radius: 12px !important;
 }
+.dashboard-card {
+    background: white;
+    padding: 24px;
+    border-radius: 22px;
+    border: 1px solid #e8e8e8;
+    box-shadow: 0 8px 22px rgba(20, 33, 61, 0.08);
+    min-height: 150px;
+    margin-bottom: 18px;
+}
+
+.dashboard-title {
+    font-size: 22px;
+    font-weight: 800;
+    color: #14213d;
+    margin-bottom: 12px;
+}
+
+.dashboard-text {
+    font-size: 16px;
+    color: #64748b;
+    line-height: 1.6;
+}
+
+.motivation-card {
+    background: linear-gradient(135deg, #fff4a8, #ffe66d);
+    padding: 24px;
+    border-radius: 22px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 8px 22px rgba(20, 33, 61, 0.08);
+}
+
+.motivation-title {
+    font-size: 21px;
+    font-weight: 800;
+    color: #14213d;
+    margin-bottom: 8px;
+}
+
+.motivation-text {
+    font-size: 18px;
+    color: #334155;
+    font-weight: 600;
+}
 </style>
 """, unsafe_allow_html=True)
 
