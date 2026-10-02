@@ -98,18 +98,6 @@ logo_path = Path("logo_ai_study_planner.png")
 
 if logo_path.exists():
     st.image(str(logo_path), width=180)
-# ==============================
-# MAIN HEADER
-# ==============================
-st.markdown(
-    '<div class="main-title">📚 AI Study Planner</div>',
-    unsafe_allow_html=True
-)
-
-st.markdown(
-    '<div class="subtitle">Belajar lebih bijak, terancang dan menyeronokkan ✨</div>',
-    unsafe_allow_html=True
-)
 
 
 # ==============================
