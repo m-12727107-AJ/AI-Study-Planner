@@ -72,7 +72,13 @@ st.markdown("""
 }
 </style>
 """, unsafe_allow_html=True)
+# ==============================
+# LOGO
+# ==============================
+logo_path = Path("logo_ai_study_planner.png")
 
+if logo_path.exists():
+    st.image(str(logo_path), width=180)
 # ==============================
 # MAIN HEADER
 # ==============================
