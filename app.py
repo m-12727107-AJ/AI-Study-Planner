@@ -210,34 +210,36 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ==============================
-# STATS
+# STATS - DASHBOARD STYLE
 # ==============================
-c1, c2, c3, c4 = st.columns(4)
 
-with c1:
-    st.markdown(
-        '<div class="card"><div class="stat">🏆<br>Lencana<br>0</div></div>',
-        unsafe_allow_html=True
+st.markdown("### 📊 Ringkasan Pembelajaran")
+
+s1, s2, s3, s4 = st.columns(4)
+
+with s1:
+    st.metric(
+        label="🏆 Lencana",
+        value=st.session_state.badges
     )
 
-with c2:
-    st.markdown(
-        '<div class="card"><div class="stat">⏱️<br>Masa<br>0 min</div></div>',
-        unsafe_allow_html=True
+with s2:
+    st.metric(
+        label="⏱️ Masa Belajar",
+        value=f"{st.session_state.study_minutes} min"
     )
 
-with c3:
-    st.markdown(
-        f'<div class="card"><div class="stat">🪙<br>Coins<br>{st.session_state.coins}</div></div>',
-        unsafe_allow_html=True
+with s3:
+    st.metric(
+        label="🪙 Coins",
+        value=st.session_state.coins
     )
 
-with c4:
-    st.markdown(
-        f'<div class="card"><div class="stat">⭐<br>Level<br>{max(1, st.session_state.xp // 100 + 1)}</div></div>',
-        unsafe_allow_html=True
+with s4:
+    st.metric(
+        label="⭐ Level",
+        value=max(1, st.session_state.xp // 100 + 1)
     )
-
 # ==============================
 # MENU UTAMA
 # ==============================
