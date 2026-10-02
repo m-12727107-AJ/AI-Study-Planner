@@ -94,98 +94,12 @@ st.markdown("""
 # ==============================
 # LOGO
 # ==============================
-logo_path = Path("logo_ai_study_planner.png")
-
+logo_path = Path(__file__).parent / "logo_ai_study_planner.png"
 if logo_path.exists():
     st.image(str(logo_path), width=180)
 
 
-# ==============================
-# STYLE
-# ==============================
-st.markdown("""
-<style>
-.stApp {
-    background: linear-gradient(135deg, #fffdf5, #fff7cf);
-}
 
-.main-title {
-    font-size: 42px;
-    font-weight: 800;
-    color: #14213d;
-    text-align: center;
-}
-
-.subtitle {
-    font-size: 18px;
-    color: #555;
-    text-align: center;
-}
-
-.card {
-    background: white;
-    padding: 20px;
-    border-radius: 20px;
-    margin-bottom: 15px;
-    box-shadow: 0 5px 18px rgba(0,0,0,0.08);
-}
-
-.stat {
-    text-align: center;
-    font-size: 20px;
-    font-weight: 700;
-    color: #14213d;
-}
-
-button {
-    border-radius: 12px !important;
-}
-.dashboard-card {
-    background: white;
-    padding: 24px;
-    border-radius: 22px;
-    border: 1px solid #e8e8e8;
-    box-shadow: 0 8px 22px rgba(20, 33, 61, 0.08);
-    min-height: 150px;
-    margin-bottom: 18px;
-}
-
-.dashboard-title {
-    font-size: 22px;
-    font-weight: 800;
-    color: #14213d;
-    margin-bottom: 12px;
-}
-
-.dashboard-text {
-    font-size: 16px;
-    color: #64748b;
-    line-height: 1.6;
-}
-
-.motivation-card {
-    background: linear-gradient(135deg, #fff4a8, #ffe66d);
-    padding: 24px;
-    border-radius: 22px;
-    margin-top: 10px;
-    margin-bottom: 20px;
-    box-shadow: 0 8px 22px rgba(20, 33, 61, 0.08);
-}
-
-.motivation-title {
-    font-size: 21px;
-    font-weight: 800;
-    color: #14213d;
-    margin-bottom: 8px;
-}
-
-.motivation-text {
-    font-size: 18px;
-    color: #334155;
-    font-weight: 600;
-}
-</style>
-""", unsafe_allow_html=True)
 
 # ==============================
 # SPLASH SCREEN
