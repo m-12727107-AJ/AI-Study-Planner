@@ -33,6 +33,9 @@ if "study_minutes" not in st.session_state:
 
 if "level" not in st.session_state:
     st.session_state.level = 1
+
+if "xp" not in st.session_state:
+    st.session_state.xp = 0
     
 # ==============================
 # SURFACE STYLE
