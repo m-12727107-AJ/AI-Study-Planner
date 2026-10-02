@@ -257,6 +257,7 @@ if page == "Home":
 
     st.markdown("## 🏠 Dashboard")
 
+    # Kad utama
     d1, d2 = st.columns(2)
 
     with d1:
@@ -264,8 +265,9 @@ if page == "Home":
         <div class="dashboard-card">
             <div class="dashboard-title">📅 Hari Ini</div>
             <div class="dashboard-text">
-                Belum ada jadual pembelajaran.<br><br>
-                Gunakan <b>Study Planner</b> untuk bina jadual.
+                Belum ada jadual pembelajaran.
+                <br><br>
+                Gunakan <b>Study Planner</b> untuk bina jadual ulang kaji.
             </div>
         </div>
         """, unsafe_allow_html=True)
@@ -277,22 +279,47 @@ if page == "Home":
             <div class="dashboard-text">
                 Teruskan pembelajaran kamu dan bina kemahiran
                 sedikit demi sedikit.
+                <br><br>
+                <b>Level 1</b> • 0 XP
             </div>
         </div>
         """, unsafe_allow_html=True)
 
+    # Motivasi
     st.markdown("""
     <div class="motivation-card">
         <div class="motivation-title">💡 Motivasi Hari Ini</div>
         <div class="motivation-text">
-            “Sedikit demi sedikit, lama-lama menjadi hebat!”
+            “Sedikit demi sedikit, lama-lama menjadi hebat!” 🌟
         </div>
     </div>
     """, unsafe_allow_html=True)
 
+    # Aktiviti pantas
+    st.markdown("### ⚡ Aktiviti Pantas")
 
-elif page == "Planner":
+    q1, q2, q3 = st.columns(3)
 
+    with q1:
+        if st.button("📅 Mula Planner", key="quick_planner",
+                     use_container_width=True):
+            st.session_state.page = "Planner"
+            st.rerun()
+
+    with q2:
+        if st.button("🤖 Tanya Buddy", key="quick_buddy",
+                     use_container_width=True):
+            st.session_state.page = "Buddy"
+            st.rerun()
+
+    with q3:
+        if st.button("📝 Cuba Quiz", key="quick_quiz",
+                     use_container_width=True):
+            st.session_state.page = "Quiz"
+            st.rerun()
+
+    elif page == "Planner":
+        
     st.markdown("## 📅 Study Planner")
 
     st.info("📚 Bahagian Study Planner akan digunakan untuk membina jadual ulang kaji.")
