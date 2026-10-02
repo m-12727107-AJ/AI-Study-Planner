@@ -239,47 +239,84 @@ with c4:
     )
 
 # ==============================
-# MENU
+# MENU UTAMA - CARD STYLE
 # ==============================
-st.markdown(
-    '<div class="section-title">🌟 Menu Utama</div>',
-    unsafe_allow_html=True
-)
-m1, m2, m3, m4 = st.columns(4)
 
-with m1:
-    if st.button("🏠 Home", use_container_width=True):
-        st.session_state.page = "Home"
+st.markdown("""
+<div style="
+    font-size: 26px;
+    font-weight: 800;
+    color: #14213d;
+    margin-top: 20px;
+    margin-bottom: 16px;
+">
+    🌟 Menu Utama
+</div>
+""", unsafe_allow_html=True)
 
-with m2:
-    if st.button("📅 Study Planner", use_container_width=True):
-        st.session_state.page = "Planner"
+menu_items = [
+    ("🏠", "Home", "Dashboard utama", "Home"),
+    ("📅", "Study Planner", "Rancang jadual belajar", "Planner"),
+    ("🤖", "AI Study Buddy", "Pembantu belajar AI", "Buddy"),
+    ("📝", "Quiz", "Uji pengetahuan", "Quiz"),
+    ("🎯", "Missions", "Selesaikan misi", "Missions"),
+    ("🧠", "Learning Path", "Laluan pembelajaran", "Learning"),
+    ("🏆", "Progress", "Lihat kemajuan", "Progress"),
+    ("⚙️", "Settings", "Tetapan aplikasi", "Settings")
+]
 
-with m3:
-    if st.button("🤖 AI Study Buddy", use_container_width=True):
-        st.session_state.page = "Buddy"
+for row in range(0, 8, 4):
 
-with m4:
-    if st.button("📝 Quiz", use_container_width=True):
-        st.session_state.page = "Quiz"
+    cols = st.columns(4)
 
-m5, m6, m7, m8 = st.columns(4)
+    for i, col in enumerate(cols):
 
-with m5:
-    if st.button("🎯 Missions", use_container_width=True):
-        st.session_state.page = "Missions"
+        icon, title, description, page_name = menu_items[row + i]
 
-with m6:
-    if st.button("🧠 Learning Path", use_container_width=True):
-        st.session_state.page = "Learning"
+        with col:
 
-with m7:
-    if st.button("🏆 Progress", use_container_width=True):
-        st.session_state.page = "Progress"
+            st.markdown(f"""
+            <div style="
+                background: white;
+                border-radius: 20px;
+                padding: 22px;
+                min-height: 145px;
+                margin-bottom: 10px;
+                border: 1px solid #e5e7eb;
+                box-shadow: 0 6px 18px rgba(20,33,61,0.08);
+            ">
+                <div style="
+                    font-size: 32px;
+                    margin-bottom: 10px;
+                ">
+                    {icon}
+                </div>
 
-with m8:
-    if st.button("⚙️ Settings", use_container_width=True):
-        st.session_state.page = "Settings"
+                <div style="
+                    font-size: 18px;
+                    font-weight: 800;
+                    color: #14213d;
+                ">
+                    {title}
+                </div>
+
+                <div style="
+                    font-size: 14px;
+                    color: #64748b;
+                    margin-top: 6px;
+                ">
+                    {description}
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
+
+            if st.button(
+                f"Buka {title}",
+                key=f"menu_{page_name}",
+                use_container_width=True
+            ):
+                st.session_state.page = page_name
+                st.rerun()
 # ==============================
 # PAGE CONTENT
 # ==============================
