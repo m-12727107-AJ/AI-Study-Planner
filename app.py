@@ -241,8 +241,10 @@ with c4:
 # ==============================
 # MENU
 # ==============================
-st.markdown("### 🌟 Menu Utama")
-
+st.markdown(
+    '<div class="section-title">🌟 Menu Utama</div>',
+    unsafe_allow_html=True
+)
 m1, m2, m3, m4 = st.columns(4)
 
 with m1:
