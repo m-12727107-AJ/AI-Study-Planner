@@ -18,7 +18,108 @@ st.set_page_config(
 # ==============================
 if "started" not in st.session_state:
     st.session_state.started = False
+# ==============================
+# SURFACE STYLE
+# ==============================
+st.markdown("""
+<style>
+.stApp {
+    background: linear-gradient(135deg, #fff8d6 0%, #ffffff 55%, #eef3ff 100%);
+}
 
+.main-title {
+    font-size: 48px;
+    font-weight: 800;
+    color: #172554;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    font-size: 20px;
+    color: #475569;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.card {
+    background: white;
+    padding: 24px;
+    border-radius: 22px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 8px 25px rgba(15, 23, 42, 0.08);
+    margin-bottom: 18px;
+}
+
+.card-title {
+    font-size: 23px;
+    font-weight: 700;
+    color: #172554;
+}
+
+.card-text {
+    color: #64748b;
+    font-size: 16px;
+}
+
+.stButton > button {
+    width: 100%;
+    border-radius: 14px;
+    min-height: 50px;
+    font-weight: 700;
+    border: none;
+}
+</style>
+""", unsafe_allow_html=True)
+
+# ==============================
+# MAIN HEADER
+# ==============================
+st.markdown(
+    '<div class="main-title">📚 AI Study Planner</div>',
+    unsafe_allow_html=True
+)
+
+st.markdown(
+    '<div class="subtitle">Belajar lebih bijak, terancang dan menyeronokkan ✨</div>',
+    unsafe_allow_html=True
+)
+
+# ==============================
+# WELCOME CARDS
+# ==============================
+col1, col2, col3 = st.columns(3)
+
+with col1:
+    st.markdown("""
+    <div class="card">
+        <div class="card-title">📅 Study Planner</div>
+        <div class="card-text">
+        Susun jadual ulang kaji mengikut subjek dan masa kamu.
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+with col2:
+    st.markdown("""
+    <div class="card">
+        <div class="card-title">🤖 AI Study Buddy</div>
+        <div class="card-text">
+        Dapatkan motivasi dan bantuan ketika belajar.
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+with col3:
+    st.markdown("""
+    <div class="card">
+        <div class="card-title">🎯 Misi & Progress</div>
+        <div class="card-text">
+        Selesaikan misi, kumpul XP dan buka lencana.
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
 if "page" not in st.session_state:
     st.session_state.page = "Home"
 
