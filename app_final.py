@@ -1,0 +1,393 @@
+from pathlib import Path
+
+import streamlit as st
+from study_buddy import show_study_buddy
+
+# ==============================
+# CONFIG
+# ==============================
+st.set_page_config(
+    page_title="AI Study Planner",
+    page_icon="📚",
+    layout="wide",
+    initial_sidebar_state="collapsed"
+)
+
+# ==============================
+# SESSION STATE
+# ==============================
+if "started" not in st.session_state:
+    st.session_state.started = False
+
+if "page" not in st.session_state:
+    st.session_state.page = "Home"
+
+if "coins" not in st.session_state:
+    st.session_state.coins = 0
+
+if "xp" not in st.session_state:
+    st.session_state.xp = 0
+
+# ==============================
+# STYLE
+# ==============================
+st.markdown("""
+<style>
+.stApp {
+    background: linear-gradient(135deg, #fffdf5, #fff7cf);
+}
+
+.main-title {
+    font-size: 42px;
+    font-weight: 800;
+    color: #14213d;
+    text-align: center;
+}
+
+.subtitle {
+    font-size: 18px;
+    color: #555;
+    text-align: center;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 20px;
+    margin-bottom: 15px;
+    box-shadow: 0 5px 18px rgba(0,0,0,0.08);
+}
+
+.stat {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 700;
+    color: #14213d;
+}
+
+button {
+    border-radius: 12px !important;
+}
+</style>
+""", unsafe_allow_html=True)
+
+# ==============================
+# SPLASH SCREEN
+# ==============================
+if not st.session_state.started:
+
+    st.markdown("<br><br>", unsafe_allow_html=True)
+
+    st.markdown(
+        '<div class="main-title">📚 AI Study Planner</div>',
+        unsafe_allow_html=True
+    )
+
+    st.markdown(
+        '<div class="subtitle">Belajar lebih teratur, lebih bijak dan lebih menyeronokkan.</div>',
+        unsafe_allow_html=True
+    )
+
+    st.markdown("<br>", unsafe_allow_html=True)
+
+    try:
+        st.image(
+            "/content/logo_ai_study_planner.png",
+            width=260
+        )
+    except:
+        st.markdown(
+            "<h1 style='text-align:center;'>🧠📚</h1>",
+            unsafe_allow_html=True
+        )
+
+    st.markdown("<br>", unsafe_allow_html=True)
+
+    col1, col2, col3 = st.columns([1, 2, 1])
+
+    with col2:
+        if st.button("🚀 MULA", use_container_width=True):
+            st.session_state.started = True
+            st.rerun()
+
+    st.stop()
+
+# ==============================
+# HEADER
+# ==============================
+top1, top2 = st.columns([5, 1])
+
+with top1:
+    st.markdown(
+        '<div class="main-title" style="text-align:left;font-size:32px;">📚 AI Study Planner</div>',
+        unsafe_allow_html=True
+    )
+
+with top2:
+    if st.button("⚙️"):
+        st.session_state.page = "Settings"
+
+# ==============================
+# PROFILE
+# ==============================
+st.markdown("""
+<div class="card">
+    <h2>👋 Hai, Student!</h2>
+    <p>Selamat datang kembali. Jom teruskan pembelajaran hari ini.</p>
+</div>
+""", unsafe_allow_html=True)
+
+# ==============================
+# STATS
+# ==============================
+c1, c2, c3, c4 = st.columns(4)
+
+with c1:
+    st.markdown(
+        '<div class="card"><div class="stat">🏆<br>Lencana<br>0</div></div>',
+        unsafe_allow_html=True
+    )
+
+with c2:
+    st.markdown(
+        '<div class="card"><div class="stat">⏱️<br>Masa<br>0 min</div></div>',
+        unsafe_allow_html=True
+    )
+
+with c3:
+    st.markdown(
+        f'<div class="card"><div class="stat">🪙<br>Coins<br>{st.session_state.coins}</div></div>',
+        unsafe_allow_html=True
+    )
+
+with c4:
+    st.markdown(
+        f'<div class="card"><div class="stat">⭐<br>Level<br>{max(1, st.session_state.xp // 100 + 1)}</div></div>',
+        unsafe_allow_html=True
+    )
+
+# ==============================
+# MENU
+# ==============================
+st.markdown("### 🌟 Menu Utama")
+
+m1, m2, m3, m4 = st.columns(4)
+
+with m1:
+    if st.button("🏠 Home", use_container_width=True):
+        st.session_state.page = "Home"
+
+with m2:
+    if st.button("📅 Study Planner", use_container_width=True):
+        st.session_state.page = "Planner"
+
+with m3:
+    if st.button("🤖 AI Study Buddy", use_container_width=True):
+        st.session_state.page = "Buddy"
+
+with m4:
+    if st.button("📝 Quiz", use_container_width=True):
+        st.session_state.page = "Quiz"
+
+m5, m6, m7, m8 = st.columns(4)
+
+with m5:
+    if st.button("🎯 Missions", use_container_width=True):
+        st.session_state.page = "Missions"
+
+with m6:
+    if st.button("🧠 Learning Path", use_container_width=True):
+        st.session_state.page = "Learning"
+
+with m7:
+    if st.button("🏆 Progress", use_container_width=True):
+        st.session_state.page = "Progress"
+
+with m8:
+    if st.button("⚙️ Settings", use_container_width=True):
+        st.session_state.page = "Settings"
+
+# ==============================
+# PAGE CONTENT
+# ==============================
+st.markdown("---")
+
+if st.session_state.page == "Home":
+
+    st.markdown("## 🏠 Dashboard")
+
+    c1, c2 = st.columns(2)
+
+    with c1:
+        st.markdown("""
+        <div class="card">
+        <h3>📅 Hari Ini</h3>
+        <p>Belum ada jadual pembelajaran.</p>
+        <p>Gunakan Study Planner untuk bina jadual.</p>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with c2:
+        st.markdown("""
+        <div class="card">
+        <h3>💡 Motivasi Hari Ini</h3>
+        <p>“Sedikit demi sedikit, lama-lama menjadi hebat!”</p>
+        </div>
+        """, unsafe_allow_html=True)
+
+elif st.session_state.page == "Planner":
+
+    st.markdown("## 📅 Study Planner")
+
+    subject = st.selectbox(
+        "📚 Pilih subjek",
+        [
+            "Matematik",
+            "Sains",
+            "Bahasa Melayu",
+            "Bahasa Inggeris",
+            "Sejarah",
+            "Geografi",
+            "Pendidikan Islam",
+            "RBT",
+            "Semua Subjek"
+        ]
+    )
+
+    duration = st.slider(
+        "⏱️ Masa belajar (minit)",
+        15,
+        180,
+        45,
+        15
+    )
+
+    if st.button("✨ Jana Pelan Belajar", use_container_width=True):
+        st.success("Pelan belajar berjaya dijana!")
+        st.session_state.xp += 10
+        st.session_state.coins += 5
+
+        st.markdown(f"""
+        <div class="card">
+        <h3>📖 Pelan Pembelajaran</h3>
+        <p><b>Subjek:</b> {subject}</p>
+        <p><b>Masa:</b> {duration} minit</p>
+        <p>🎯 Fokus → 📚 Belajar → 📝 Latihan → 🔄 Ulang kaji</p>
+        </div>
+        """, unsafe_allow_html=True)
+
+elif st.session_state.page == "Buddy":
+
+    show_study_buddy()
+
+elif st.session_state.page == "Quiz":
+
+    st.markdown("## 📝 Quiz")
+
+    level = st.selectbox(
+        "🎮 Pilih tahap",
+        [
+            "Level 1 — Beginner",
+            "Level 2 — Easy",
+            "Level 3 — Medium",
+            "Level 4 — Challenge"
+        ]
+    )
+
+    st.markdown("""
+    <div class="card">
+    <h3>❓ Soalan Contoh</h3>
+    <p>Apakah hasil daripada 5 + 3?</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+    answer = st.radio(
+        "Pilih jawapan",
+        ["A. 6", "B. 7", "C. 8", "D. 9"]
+    )
+
+    if st.button("✅ Hantar Jawapan"):
+        if answer == "C. 8":
+            st.success("🎉 Betul! +20 XP dan +10 Coins")
+            st.session_state.xp += 20
+            st.session_state.coins += 10
+        else:
+            st.error("Cuba lagi!")
+
+elif st.session_state.page == "Missions":
+
+    st.markdown("## 🎯 Missions")
+
+    st.markdown("""
+    <div class="card">
+    <h3>🌱 Misi Hari Ini</h3>
+    <p>☐ Belajar selama 30 minit</p>
+    <p>☐ Siapkan 5 soalan quiz</p>
+    <p>☐ Ulang kaji satu topik</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+elif st.session_state.page == "Learning":
+
+    st.markdown("## 🧠 Learning Path")
+
+    st.progress(
+        min(st.session_state.xp / 100, 1.0)
+    )
+
+    st.write(
+        f"⭐ XP anda: {st.session_state.xp} / 100"
+    )
+
+    st.info("Teruskan belajar untuk membuka tahap seterusnya!")
+
+elif st.session_state.page == "Progress":
+
+    st.markdown("## 🏆 Progress & Badges")
+
+    st.metric(
+        "⭐ XP",
+        st.session_state.xp
+    )
+
+    st.metric(
+        "🪙 Coins",
+        st.session_state.coins
+    )
+
+    st.markdown("### 🏅 Lencana")
+
+    if st.session_state.xp >= 100:
+        st.success("🏆 First Learner — Dibuka!")
+    else:
+        st.info("🔒 First Learner — Kumpul 100 XP")
+
+elif st.session_state.page == "Settings":
+
+    st.markdown("## ⚙️ Settings")
+
+    language = st.selectbox(
+        "🌐 Bahasa",
+        ["Bahasa Melayu", "English"]
+    )
+
+    sound = st.toggle(
+        "🔊 Suara",
+        value=True
+    )
+
+    alert = st.toggle(
+        "🚨 Siren / Alert",
+        value=True
+    )
+
+    st.success("Tetapan disimpan untuk sesi ini.")
+
+# ==============================
+# FOOTER
+# ==============================
+st.markdown("---")
+
+st.caption(
+    "📚 AI Study Planner • Belajar dengan lebih bijak 🚀"
+)
