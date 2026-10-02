@@ -18,6 +18,8 @@ st.set_page_config(
 # ==============================
 if "started" not in st.session_state:
     st.session_state.started = False
+if "page" not in st.session_state:
+    st.session_state.page = "Home"
 # ==============================
 # SURFACE STYLE
 # ==============================
@@ -92,48 +94,6 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# ==============================
-# WELCOME CARDS
-# ==============================
-col1, col2, col3 = st.columns(3)
-
-with col1:
-    st.markdown("""
-    <div class="card">
-        <div class="card-title">📅 Study Planner</div>
-        <div class="card-text">
-        Susun jadual ulang kaji mengikut subjek dan masa kamu.
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
-
-with col2:
-    st.markdown("""
-    <div class="card">
-        <div class="card-title">🤖 AI Study Buddy</div>
-        <div class="card-text">
-        Dapatkan motivasi dan bantuan ketika belajar.
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
-
-with col3:
-    st.markdown("""
-    <div class="card">
-        <div class="card-title">🎯 Misi & Progress</div>
-        <div class="card-text">
-        Selesaikan misi, kumpul XP dan buka lencana.
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
-if "page" not in st.session_state:
-    st.session_state.page = "Home"
-
-if "coins" not in st.session_state:
-    st.session_state.coins = 0
-
-if "xp" not in st.session_state:
-    st.session_state.xp = 0
 
 # ==============================
 # STYLE
@@ -313,7 +273,97 @@ with m7:
 with m8:
     if st.button("⚙️ Settings", use_container_width=True):
         st.session_state.page = "Settings"
+# ==============================
+# PAGE CONTENT
+# ==============================
 
+page = st.session_state.page
+
+if page == "Home":
+
+    st.markdown("## 🏠 Dashboard")
+
+    d1, d2 = st.columns(2)
+
+    with d1:
+        st.markdown("""
+        <div class="dashboard-card">
+            <div class="dashboard-title">📅 Hari Ini</div>
+            <div class="dashboard-text">
+                Belum ada jadual pembelajaran.<br><br>
+                Gunakan <b>Study Planner</b> untuk bina jadual.
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with d2:
+        st.markdown("""
+        <div class="dashboard-card">
+            <div class="dashboard-title">🧠 Learning Path</div>
+            <div class="dashboard-text">
+                Teruskan pembelajaran kamu dan bina kemahiran
+                sedikit demi sedikit.
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    st.markdown("""
+    <div class="motivation-card">
+        <div class="motivation-title">💡 Motivasi Hari Ini</div>
+        <div class="motivation-text">
+            “Sedikit demi sedikit, lama-lama menjadi hebat!”
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+
+elif page == "Planner":
+
+    st.markdown("## 📅 Study Planner")
+
+    st.info("📚 Bahagian Study Planner akan digunakan untuk membina jadual ulang kaji.")
+
+
+elif page == "Buddy":
+
+    st.markdown("## 🤖 AI Study Buddy")
+
+    show_study_buddy()
+
+
+elif page == "Quiz":
+
+    st.markdown("## 📝 Quiz")
+
+    st.info("📝 Bahagian Quiz akan digunakan untuk menguji pengetahuan kamu.")
+
+
+elif page == "Missions":
+
+    st.markdown("## 🎯 Missions")
+
+    st.info("🎯 Selesaikan misi untuk mendapatkan XP dan coins.")
+
+
+elif page == "Learning":
+
+    st.markdown("## 🧠 Learning Path")
+
+    st.info("🧠 Ikuti laluan pembelajaran kamu di sini.")
+
+
+elif page == "Progress":
+
+    st.markdown("## 🏆 Progress")
+
+    st.info("🏆 Pantau XP, level, coins dan lencana kamu di sini.")
+
+
+elif page == "Settings":
+
+    st.markdown("## ⚙️ Settings")
+
+    st.info("⚙️ Tetapan aplikasi akan berada di sini.")
 # ==============================
 # PAGE CONTENT
 # ==============================
